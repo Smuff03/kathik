@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ThemeToggle from './ThemeToggle.jsx'
-import { useTheme } from '../context/ThemeContext.jsx'
+import { useTheme } from '../App.jsx'
 
 const navLinks = [
   { label: 'How It Works', href: '#how-it-works' },

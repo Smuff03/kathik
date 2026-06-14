@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from '../context/ThemeContext.jsx'
+import { useTheme } from '../App.jsx'
 
 export default function ThemeToggle({ className = '' }) {
     const { theme, toggle } = useTheme()
