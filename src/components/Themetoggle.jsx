@@ -55,9 +55,12 @@ export default function ThemeToggle({ className = '' }) {
                                 ☀️
                             </motion.span>
                         )}
+
                     </AnimatePresence>
                 </motion.div>
             </div>
         </motion.button>
     )
 }
+
+//THis is updated theme toggle
