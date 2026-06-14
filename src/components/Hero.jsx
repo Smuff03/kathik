@@ -40,7 +40,7 @@ function TypewriterText({ phrases }) {
   }, [charIndex, isDeleting, currentPhrase, phrases])
 
   return (
-    <div className="font-display italic text-sm md:text-base text-violet-glow/70 typewriter min-h-[1.5em]">
+    <div className="font-display italic text-sm text-violet-glow/70 typewriter min-h-[1.5em]">
       {displayText}
     </div>
   )
@@ -49,18 +49,33 @@ function TypewriterText({ phrases }) {
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background radial glows */}
+      {/* Background glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-violet/10 blur-[100px] animate-glow-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-gold/8 blur-[80px] animate-glow-pulse" style={{ animationDelay: '1.5s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-azure/5 blur-[120px]" />
+        <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 rounded-full bg-violet/10 blur-[80px] md:blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 md:w-80 h-48 md:h-80 rounded-full bg-gold/8 blur-[60px] md:blur-[80px]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-28 pb-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-16">
 
-          {/* Left: Text content */}
-          <div className="order-2 lg:order-1">
+        {/* Mobile: stack vertically. Desktop: side by side */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-6 items-center">
+
+          {/* 3D Book — TOP on mobile, RIGHT on desktop */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            className="relative w-full lg:order-2"
+            style={{ height: '280px' }}
+          >
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-40 h-40 rounded-full bg-violet/20 blur-[50px]" />
+            </div>
+            <Book3D />
+          </motion.div>
+
+          {/* Text — BOTTOM on mobile, LEFT on desktop */}
+          <div className="w-full lg:order-1 mt-4 lg:mt-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -76,11 +91,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.35, ease: [0.23, 1, 0.32, 1] }}
-              className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight mt-3 mb-6"
+              className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.08] tracking-tight mt-2 mb-4"
             >
-              <span style={{ color: "var(--text-primary)" }}>Your Story</span>
+              <span style={{ color: 'var(--text-primary)' }}>Your Story</span>
               <br />
-              <span style={{ color: "var(--text-primary)" }}>Deserves To</span>
+              <span style={{ color: 'var(--text-primary)' }}>Deserves To</span>
               <br />
               <span className="gradient-text">Become A Book</span>
             </motion.h1>
@@ -89,7 +104,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="mb-4"
+              className="mb-3"
             >
               <TypewriterText phrases={handwrittenPhrases} />
             </motion.div>
@@ -98,7 +113,8 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7 }}
-              className="text-ghost text-base md:text-lg leading-relaxed max-w-lg mt-4 mb-8"
+              className="text-sm sm:text-base leading-relaxed max-w-lg mt-3 mb-6"
+              style={{ color: 'var(--text-ghost)' }}
             >
               Write your memories, dreams, and imagination. KATHIK uses AI to transform
               your words into a beautifully designed book — complete with poems, shayari,
@@ -109,13 +125,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.85 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-3"
             >
-              <a href="#demo" className="btn-primary">
+              <a href="#demo" className="btn-primary justify-center sm:justify-start">
                 <span>✦</span>
                 Create My Story
               </a>
-              <a href="#early-access" className="btn-secondary">
+              <a href="#early-access" className="btn-secondary text-center sm:text-left">
                 I Want Early Access
               </a>
             </motion.div>
@@ -128,35 +144,21 @@ export default function Hero() {
               <HeroCounter count={12482} />
             </motion.div>
           </div>
-
-          {/* Right: 3D Book */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="order-1 lg:order-2 relative h-[420px] md:h-[520px] lg:h-[600px]"
-          >
-            {/* Glow behind the book */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-64 h-64 rounded-full bg-violet/20 blur-[60px]" />
-            </div>
-            <Book3D />
-          </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — hidden on small screens */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
       >
-        <span className="text-xs text-ghost tracking-widest uppercase font-mono">Scroll</span>
+        <span className="text-xs tracking-widest uppercase font-mono" style={{ color: 'var(--text-ghost)' }}>Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-px h-12 bg-gradient-to-b from-violet-glow/50 to-transparent"
+          className="w-px h-10 bg-gradient-to-b from-violet-glow/50 to-transparent"
         />
       </motion.div>
     </section>
