@@ -18,7 +18,7 @@
     "three": "^0.167.1"
   },
   "engines": {
-    "node": "18.x"
+    "node": "22.x"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
